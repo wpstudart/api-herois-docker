@@ -1,0 +1,16 @@
+docker build -t api-herois . 
+
+docker run -d --name mongodb mongo:3.5  
+
+docker run -p 3000:3000 --link mongodb:mongodb -e MONGO_URL=mongodb api-herois
+
+docker ps
+
+docker login
+
+docker build -t wpstudart/api-herois:v1 .
+
+docker tag api-herois wpstudart/api-herois:v1
+
+docker images
+
