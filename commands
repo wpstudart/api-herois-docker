@@ -1,0 +1,36 @@
+docker build -t api-herois . 
+
+docker run -d --name mongodb mongo:3.5  
+
+docker run -p 3000:3000 --link mongodb:mongodb -e MONGO_URL=mongodb api-herois
+
+docker ps
+
+docker login
+
+docker build -t wpstudart/api-herois:v1 .
+
+docker tag api-herois wpstudart/api-herois:v1
+
+docker images
+
+# Comandos Azure
+
+az group create --name k8s-curso --location eastus
+
+# Comando para criar serviço de container privado do Azure
+
+az acr create --resource-group k8s-curso --name k8simagensWPS --sku Basic
+
+k8simagenswps.azurecr.io
+
+# Pra linkar o docker com a instancia do azure
+
+az acr login --name k8simagensWPS
+
+az acr list --resource-group k8s-curso --output table
+
+docker tag wpstudart/api-herois:v1 k8simagenswps.azurecr.io/api-herois:v1
+
+docker push k8simagenswps.azurecr.io/api-herois:v1
+
